@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- viewport-fit=cover pushes content above the notch/camera bar -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+ 
+    <!-- PWA / App Meta -->
+    <meta name="theme-color" content="#0a0a0f" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Percenta" />
+    <meta name="application-name" content="Percenta" />
+    <meta name="mobile-web-app-capable" content="yes" />
+ 
+    <!-- SEO -->
+    <meta name="description" content="Percenta — Percentage calculator and mini game. Calculate scores, dodge falling numbers!" />
+ 
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="/icon-512.png" />
+ 
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+ 
+    <title>Percenta</title>
+ 
+    <style>
+      /* ---- Splash Screen ---- */
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { background: #0a0a0f; }
+ 
+      #splash {
+        position: fixed;
+        inset: 0;
+        /* safe-area-inset keeps splash clear of camera cutout */
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+        background: linear-gradient(160deg, #12121a 0%, #0a0a0f 60%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: opacity 0.6s ease;
+        /* subtle grid */
+        background-image:
+          linear-gradient(rgba(0,255,170,0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0,255,170,0.04) 1px, transparent 1px),
+          linear-gradient(160deg, #12121a 0%, #0a0a0f 100%);
+        background-size: 40px 40px, 40px 40px, 100% 100%;
+      }
+      #splash.hide { opacity: 0; pointer-events: none; }
+ 
+      #splash .icon {
+        width: 110px;
+        height: 110px;
+        margin-bottom: 28px;
+        filter: drop-shadow(0 0 24px rgba(0,255,170,0.5));
+        animation: iconPulse 2s ease-in-out infinite;
+      }
+      #splash h1 {
+        font-family: 'Courier New', monospace;
+        font-size: 2.4rem;
+        font-weight: 900;
+        letter-spacing: -1px;
+        background: linear-gradient(135deg, #00ffaa, #00c8ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 6px;
+      }
+      #splash p {
+        font-family: 'Courier New', monospace;
+        font-size: 0.7rem;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        color: rgba(0,255,170,0.5);
+      }
+      #splash .loader {
+        margin-top: 48px;
+        width: 48px;
+        height: 3px;
+        background: rgba(0,255,170,0.15);
+        border-radius: 99px;
+        overflow: hidden;
+      }
+      #splash .loader-bar {
+        height: 100%;
+        width: 40%;
+        background: linear-gradient(90deg, #00ffaa, #00c8ff);
+        border-radius: 99px;
+        animation: loaderSlide 1.2s ease-in-out infinite;
+      }
+      @keyframes iconPulse {
+        0%, 100% { filter: drop-shadow(0 0 18px rgba(0,255,170,0.4)); }
+        50%       { filter: drop-shadow(0 0 36px rgba(0,255,170,0.75)); }
+      }
+      @keyframes loaderSlide {
+        0%   { transform: translateX(-100%); }
+        100% { transform: translateX(280%); }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Splash Screen (hidden once React mounts) -->
+    <div id="splash">
+      <!-- Inline SVG icon so it shows instantly, no external request needed -->
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+        <defs>
+          <linearGradient id="sbg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#12121a"/>
+            <stop offset="100%" style="stop-color:#0a0a0f"/>
+          </linearGradient>
+          <linearGradient id="sacc" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#00ffaa"/>
+            <stop offset="100%" style="stop-color:#00c8ff"/>
+          </linearGradient>
+        </defs>
+        <rect width="512" height="512" rx="100" fill="url(#sbg)"/>
+        <rect width="512" height="512" rx="100" fill="none" stroke="url(#sacc)" stroke-width="3" opacity="0.4"/>
+        <text x="256" y="320" font-family="'Courier New',monospace" font-size="300" font-weight="700"
+              text-anchor="middle" fill="url(#sacc)" opacity="0.95">%</text>
+      </svg>
+      <h1>PERCENTA</h1>
+      <p>Calculate &amp; Play</p>
+      <div class="loader"><div class="loader-bar"></div></div>
+    </div>
+ 
+    <div id="root"></div>
+ 
+    <script>
+      window.hideSplash = function () {
+        var s = document.getElementById('splash');
+        if (s) {
+          s.classList.add('hide');
+          setTimeout(function () { s.remove(); }, 700);
+        }
+      };
+    </script>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
