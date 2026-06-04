@@ -6,14 +6,14 @@
   --font-mono: 'Courier New', 'Lucida Console', monospace;
   --font-display: Impact, 'Arial Black', 'Franklin Gothic Medium', system-ui, sans-serif;
   --bg: #0a0a0f;
-  --surface: #12121a;
-  --card: #1a1a26;
+  --surface: #14141f;
+  --card: #1c1c2e;
   --accent: #00ffaa;
   --accent2: #ff6b35;
   --accent3: #a855f7;
-  --text: #e8e8f0;
-  --muted: #6b6b8a;
-  --border: rgba(255, 255, 255, 0.07);
+  --text: #f0f0fa;
+  --muted: #b8b8d8;
+  --border: rgba(255, 255, 255, 0.22);
   --glow: 0 0 30px rgba(0, 255, 170, 0.25);
  
   /* Safe area variables — keeps content below camera notch and above home bar */
@@ -87,3 +87,4 @@ body::before {
   0%, 100% { transform: scale(1); }
   50%       { transform: scale(1.05); }
 }
+ 
