@@ -283,7 +283,7 @@ function Game() {
     gs.numbers.forEach(n => {
       ctx.save()
       ctx.translate(n.x, n.y); ctx.rotate(n.rotation)
-      ctx.font = `bold ${n.size}px 'Space Mono', monospace`
+      ctx.font = `bold ${n.size}px 'Courier New', monospace`
       ctx.textAlign = 'center'; ctx.textBaseline = 'middle'
       ctx.shadowColor = n.color; ctx.shadowBlur = n.isBonus ? 20 : 8
       ctx.fillStyle = n.color; ctx.fillText(n.char, 0, 0)
@@ -297,7 +297,7 @@ function Game() {
     const pg = ctx.createRadialGradient(0, 0, 0, 0, 0, p.size * 2)
     pg.addColorStop(0, 'rgba(0,255,170,0.3)'); pg.addColorStop(1, 'rgba(0,255,170,0)')
     ctx.fillStyle = pg; ctx.beginPath(); ctx.arc(0, 0, p.size * 2, 0, Math.PI * 2); ctx.fill()
-    ctx.font = `bold ${p.size * 1.5}px 'Space Mono', monospace`
+    ctx.font = `bold ${p.size * 1.5}px 'Courier New', monospace`
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle'
     ctx.shadowColor = '#00ffaa'; ctx.shadowBlur = 20
     ctx.fillStyle = '#00ffaa'; ctx.fillText('%', 0, 0)
@@ -307,12 +307,12 @@ function Game() {
     if (gs.over) {
       ctx.fillStyle = 'rgba(0,0,0,0.75)'; ctx.fillRect(0, 0, W, H)
       ctx.textAlign = 'center'
-      ctx.font = "bold 56px 'Unbounded', sans-serif"
+      ctx.font = "bold 56px Impact, 'Arial Black', sans-serif"
       ctx.fillStyle = '#ff3366'; ctx.shadowColor = '#ff3366'; ctx.shadowBlur = 30
       ctx.fillText('GAME OVER', W/2, H/2 - 30)
-      ctx.shadowBlur = 0; ctx.font = "24px 'Space Mono', monospace"; ctx.fillStyle = '#e8e8f0'
+      ctx.shadowBlur = 0; ctx.font = "24px 'Courier New', monospace"; ctx.fillStyle = '#e8e8f0'
       ctx.fillText(`Score: ${gs.score}  |  Level: ${gs.level}`, W/2, H/2 + 20)
-      ctx.font = "14px 'Space Mono', monospace"; ctx.fillStyle = 'rgba(255,255,255,0.4)'
+      ctx.font = "14px 'Courier New', monospace"; ctx.fillStyle = 'rgba(255,255,255,0.4)'
       ctx.fillText('Press START to play again', W/2, H/2 + 60)
       setUi({ score: gs.score, lives: 0, level: gs.level, started: true, over: true })
       return
@@ -335,10 +335,10 @@ function Game() {
       for (let gy = 0; gy < H; gy += 40) {
         ctx.beginPath(); ctx.arc(gx, gy, 1, 0, Math.PI * 2); ctx.fill()
       }
-    ctx.font = "bold 100px 'Space Mono', monospace"
+    ctx.font = "bold 100px 'Courier New', monospace"
     ctx.textAlign = 'center'; ctx.fillStyle = 'rgba(0,255,170,0.12)'
     ctx.fillText('%', W/2, H/2 + 36)
-    ctx.font = "16px 'Space Mono', monospace"; ctx.fillStyle = 'rgba(255,255,255,0.25)'
+    ctx.font = "16px 'Courier New', monospace"; ctx.fillStyle = 'rgba(255,255,255,0.25)'
     ctx.fillText('Press START to begin', W/2, H/2 + 90)
   }, [])
  
